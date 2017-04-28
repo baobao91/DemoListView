@@ -1,9 +1,13 @@
 package com.example.a126308.demolistview;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,6 +35,22 @@ public class MainActivity extends AppCompatActivity {
         //  each row and the food String array together
         aa = new FoodAdapter(this, R.layout.row, food);
         lvfood.setAdapter(aa);
+
+        lvfood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Food selectedFood = food.get(position);
+
+                Intent i = new Intent (MainActivity.this,DemoListView2.class);
+
+                startActivity(i);
+                Toast.makeText(MainActivity.this, selectedFood.getName()
+                                + " Star: " + selectedFood.isStar(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 }
